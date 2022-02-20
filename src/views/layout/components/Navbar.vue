@@ -10,11 +10,14 @@
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
         <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
-            首页
+            Home
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
-          <span @click="logout" style="display:block;">退出</span>
+          <span @click="goProfile" style="display:block;">Profile</span>
+        </el-dropdown-item>
+        <el-dropdown-item divided>
+          <span @click="logout" style="display:block;">Logout</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -41,8 +44,11 @@ export default {
     toggleSideBar() {
       this.$store.dispatch('ToggleSideBar')
     },
+    goProfile(){
+      this.$router.push({path: '/profile'})
+    },
     logout() {
-      this.$store.dispatch('LogOut').then(() => {
+      this.$http.post('http://www.macrozheng.com/admin/logout').then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
     }

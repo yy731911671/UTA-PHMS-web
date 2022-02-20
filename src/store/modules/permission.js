@@ -78,26 +78,8 @@ const permission = {
   actions: {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
-        const { menus } = data;
         const { username } = data;
-        const accessedRouters = asyncRouterMap.filter(v => {
-          //admin帐号直接返回所有菜单
-          // if(username==='admin') return true;
-          if (hasPermission(menus, v)) {
-            if (v.children && v.children.length > 0) {
-              v.children = v.children.filter(child => {
-                if (hasPermission(menus, child)) {
-                  return child
-                }
-                return false;
-              });
-              return v
-            } else {
-              return v
-            }
-          }
-          return false;
-        });
+        const accessedRouters = asyncRouterMap
         //对菜单进行排序
         sortRouters(accessedRouters);
         commit('SET_ROUTERS', accessedRouters);

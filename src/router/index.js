@@ -29,9 +29,21 @@ export const constantRouterMap = [
       path: 'home',
       name: 'home',
       component: () => import('@/views/home/index'),
-      meta: {title: '首页', icon: 'home'}
+      meta: {title: 'Home', icon: 'home'}
     }]
-  }
+  },
+  {
+    path: '/profile',
+    component: Layout,
+    redirect: '/profile/profile',
+    children: [{
+      path: 'profile',
+      name: 'profile',
+      component: () => import('@/views/profile/index'),
+      meta: {title: 'Profile', icon: 'product-list'}
+    }],
+    hidden: true
+  },
 ]
 
 export const asyncRouterMap = [
