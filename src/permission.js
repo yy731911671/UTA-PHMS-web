@@ -9,11 +9,13 @@ const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (getToken()) {
+    debugger
     if (to.path === '/login') {
       next({ path: '/' })
       NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
     } else {
-      if (store.getters.roles.length === 0) {
+      console.log(store.getters)
+      if (!store.getters.name) {
         store.dispatch('GetInfo').then(res => { // 拉取用户信息
           let username=res.data.username;
           store.dispatch('GenerateRoutes', { username }).then(() => { // 生成可访问的路由表
