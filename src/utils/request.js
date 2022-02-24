@@ -25,10 +25,10 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
   /**
-  * code为非200是抛错 可结合自己业务进行修改
+  * resultCode为非1是抛错 可结合自己业务进行修改
   */
     const res = response.data
-    if (res.code !== 200) {
+    if (res.resultCode !== 1) {
       Message({
         message: res.message,
         type: 'error',
@@ -36,17 +36,17 @@ service.interceptors.response.use(
       })
 
       // 401:未登录;
-      if (res.code === 401) {
-        MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-          confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('FedLogOut').then(() => {
-            location.reload()// 为了重新实例化vue-router对象 避免bug
-          })
-        })
-      }
+      // if (res.code === 401) {
+      //   MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
+      //     confirmButtonText: '重新登录',
+      //     cancelButtonText: '取消',
+      //     type: 'warning'
+      //   }).then(() => {
+      //     store.dispatch('FedLogOut').then(() => {
+      //       location.reload()// 为了重新实例化vue-router对象 避免bug
+      //     })
+      //   })
+      // }
       return Promise.reject('error')
     } else {
       return response.data

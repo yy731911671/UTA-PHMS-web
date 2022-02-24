@@ -2,18 +2,14 @@ import request from '@/utils/request'
 
 export function login(username, password) {
   return request({
-    url: 'http://admin-api.macrozheng.com/admin/login',
+    url: '/sys/login/restful?username='+username+'&password='+password,
     method: 'post',
-    data: {
-      username,
-      password
-    }
   })
 }
 
 export function getInfo() {
   return request({
-    url: 'http://admin-api.macrozheng.com/admin/info',
+    url: '/sys/login',
     method: 'get',
   })
 }
