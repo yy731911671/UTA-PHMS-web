@@ -29,6 +29,14 @@ export function register(data) {
   })
 }
 
+export function updateProfiles(data) {
+  return request({
+    url: '/users/updateInfo',
+    method: 'put',
+    data: data
+  })
+} 
+
 export function fetchList(params) {
   return request({
     url: '/admin/list',

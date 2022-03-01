@@ -113,7 +113,7 @@
 
 <script>
 import { isvalidUsername } from "@/utils/validate";
-import { setSupport, getSupport, setCookie, getCookie } from "@/utils/support";
+import { setCookie, getCookie } from "@/utils/support";
 import login_center_bg from "@/assets/images/login_center_bg.png";
 import { register } from '@/api/login';
 export default {
