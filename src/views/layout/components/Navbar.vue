@@ -28,7 +28,7 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-
+import { logout } from '@/api/login'
 export default {
   components: {
     Breadcrumb,
@@ -48,7 +48,7 @@ export default {
       this.$router.push({path: '/profile'})
     },
     logout() {
-      this.$http.post('http://www.macrozheng.com/admin/logout').then(() => {
+      logout().then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
     }
