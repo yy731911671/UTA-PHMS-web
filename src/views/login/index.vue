@@ -11,7 +11,7 @@
         <div style="text-align: center">
           <svg-icon
             icon-class="login-mall"
-            style="width: 56px; height: 56px; color: #409eff"
+            style="width: 56px; height: 56px; color: #5e67af"
           ></svg-icon>
         </div>
         <h2 class="login-title color-main">
@@ -49,7 +49,7 @@
         </el-form-item>
         <el-form-item style="margin-bottom: 60px; text-align: center">
           <el-button
-            style="width: 45%"
+            style="width: 35%"
             type="primary"
             :loading="loading"
             @click.native.prevent="handleLogin"
@@ -57,7 +57,7 @@
             Sign in
           </el-button>
           <el-button
-            style="width: 45%"
+            style="width: 35%"
             type="primary"
             @click.native.prevent="handleTry"
           >
@@ -66,7 +66,10 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <img :src="login_center_bg" class="login-center-layout" />
+    <div class="login-bg">
+      <img :src="Vital" class="login-center-layout" />
+      <img :src="Vital2" class="login-center-layout2" />
+    </div>
     <el-dialog
       title="Register"
       :visible.sync="dialogVisible"
@@ -115,6 +118,8 @@
 import { isvalidUsername } from "@/utils/validate";
 import { setCookie, getCookie } from "@/utils/support";
 import login_center_bg from "@/assets/images/login_center_bg.png";
+import Vital from "@/assets/images/Vital.png";
+import Vital2 from "@/assets/images/vital-sign.png";
 import { register } from '@/api/login';
 export default {
   name: "login",
@@ -158,7 +163,7 @@ export default {
             callback(new Error('Please enter a numeric value'));
           } else {
               callback();
-          }     
+          }
         }, 1000);
     };
     const validateREmail = (rule, value, callback) => {
@@ -177,7 +182,7 @@ export default {
             callback(new Error('Please enter a numeric value'));
           } else {
               callback();
-          }     
+          }
         }, 1000);
     };
     const validateRWeight = (rule, value, callback) => {
@@ -189,7 +194,7 @@ export default {
             callback(new Error('Please enter a numeric value'));
           } else {
               callback();
-          }     
+          }
         }, 1000);
     };
     const validateRHeight = (rule, value, callback) => {
@@ -201,7 +206,7 @@ export default {
             callback(new Error('Please enter a numeric value'));
           } else {
               callback();
-          }     
+          }
         }, 1000);
     };
     return {
@@ -219,7 +224,8 @@ export default {
       },
       loading: false,
       pwdType: "password",
-      login_center_bg,
+      Vital,
+      Vital2,
       dialogVisible: false,
       supportDialogVisible: false,
       registerInfo: {
@@ -357,19 +363,32 @@ export default {
   right: 0;
   width: 360px;
   margin: 140px auto;
-  border-top: 10px solid #409eff;
+  border-top: 10px solid #5e67af;
 }
 
 .login-title {
   text-align: center;
 }
-
+.login-bg{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .login-center-layout {
-  background: #409eff;
+  background: #5e67af;
   width: auto;
   height: auto;
   max-width: 100%;
   max-height: 100%;
   margin-top: 200px;
+}
+.login-center-layout2 {
+  background: #5e67af;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 200px;
+  left: 50%;
 }
 </style>

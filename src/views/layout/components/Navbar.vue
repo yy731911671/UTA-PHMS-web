@@ -29,15 +29,19 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import { logout } from '@/api/login'
+import avatar from "@/assets/images/avatar.png";
 export default {
   components: {
     Breadcrumb,
     Hamburger
   },
+  data(){
+    return{
+    avatar
+  }},
   computed: {
     ...mapGetters([
-      'sidebar',
-      'avatar'
+      'sidebar'
     ])
   },
   methods: {

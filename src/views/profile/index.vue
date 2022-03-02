@@ -5,6 +5,7 @@
       direction="vertical"
       :column="1"
       border
+      style="width: 50%;margin-left: 25%;"
     >
     <template slot="extra">
       <el-button type="primary" size="small" @click="openEditModel">Edit</el-button>
@@ -184,7 +185,7 @@ export default {
           console.log("Parameter validation is invalid!");
           return false;
         }
-      });  
+      });
     },
     cancelEditForm() {
       this.dialogVisible = false;
