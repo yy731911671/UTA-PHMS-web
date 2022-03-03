@@ -78,7 +78,7 @@
     >
       <el-form
         label-position="left"
-        label-width="80px"
+        label-width="100px"
         :model="registerInfo"
         :rules="registerRules"
         ref="registerInfo"
