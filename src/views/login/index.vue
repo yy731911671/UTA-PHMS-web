@@ -87,7 +87,7 @@
           <el-input v-model="registerInfo.username"></el-input>
         </el-form-item>
         <el-form-item label="Password" prop="password">
-          <el-input v-model="registerInfo.password"></el-input>
+          <el-input v-model="registerInfo.password" type="password"></el-input>
         </el-form-item>
         <el-form-item label="Email" prop="email">
           <el-input v-model="registerInfo.email"></el-input>
