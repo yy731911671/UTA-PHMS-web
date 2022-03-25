@@ -46,7 +46,7 @@ export const asyncRouterMap = [
       path: 'medicationList',
       name: 'medicationList',
       component: () => import('@/views/medication/list/index'),
-      meta: {title: 'Records', icon: 'product-list'}
+      meta: {title: 'Records', icon: 'product-list'},
     },
       {
         path: 'addMedication',
