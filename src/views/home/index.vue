@@ -18,9 +18,9 @@
     </div>
     <div id="scrollBox" class="scrollBoxContent">
       <div v-for="(val, index) in allMenuList" :key="val.id" class="scrollItem">
-        <p class="itemTitle">{{ val.name }}</p>
+        <div><span class="itemTitle">{{ val.name }}</span><span class="jump" @click="jumpPage(index)">click me to page <i class="el-icon-d-arrow-right"></i></span></div>
         <ul class="itemList">
-          <li v-for="item in val.children" :key="item.id" class="itemListLi">
+          <li v-for="(item,index) in val.children" :key="item.id" class="itemListLi">
             <img :src="item.url" v-if="item.url">
             <div class="content-txt" v-html="item.content" v-if="item.content"></div>
           </li>
@@ -118,6 +118,23 @@
           }
         }
       },
+      jumpPage(index){
+        switch(index) {
+          case 0:
+            this.$router.push('/medication/medicationList');
+            break;
+          case 1:
+            break;
+          case 2:
+            break;
+          case 3:
+            break;
+          case 4:
+            this.$router.push('/comm/list');
+            break;
+        }
+        console.log(index)
+      }
     }
   }
 </script>
@@ -127,6 +144,7 @@
     margin-left: 120px;
     margin-right: 120px;
     font-family:"SourceSansPro-Regular", "Graphik SemiBold","Arial","微软雅黑",Sans-Serif;
+
   }
   .content-txt{
     font-size: 18px;
@@ -160,5 +178,8 @@
   .tableliActive{
     border-bottom: 0.313rem solid #00baff;
   }
-
+.jump{
+  color: #c28b00;
+  margin-left: 50px;
+}
 </style>

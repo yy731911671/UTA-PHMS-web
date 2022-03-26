@@ -13,10 +13,9 @@ router.beforeEach((to, from, next) => {
       next({ path: '/' })
       NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
     } else {
-      console.log(store.getters)
       if (!store.getters.name) {
         store.dispatch('GetInfo').then(res => { // 拉取用户信息
-          let username=res.data.username;
+          let username='amdin';
           store.dispatch('GenerateRoutes', { username }).then(() => { // 生成可访问的路由表
             router.addRoutes(store.getters.addRouters); // 动态添加可访问路由表
             next({ ...to, replace: true })

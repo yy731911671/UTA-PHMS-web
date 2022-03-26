@@ -41,9 +41,7 @@ const user = {
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
-          const data = response.data
-          commit('SET_NAME', data.username)
-          commit('SET_AVATAR', data.icon)
+          commit('SET_NAME', 'amdin')
           resolve(response)
         }).catch(error => {
           reject(error)
