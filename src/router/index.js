@@ -53,6 +53,11 @@ export const asyncRouterMap = [
         name: 'addMedication',
         component: () => import('@/views/medication/add/index'),
         meta: {title: 'Search', icon: 'product-add'}
+      },{
+        path: 'medicationLogList',
+        name: 'medicationLogList',
+        component: () => import('@/views/medication/log/index'),
+        meta: {title: 'Logs', icon: 'ums-menu'},
       },
     ]
   },

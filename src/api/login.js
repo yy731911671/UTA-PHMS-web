@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(username, password) {
   return request({
-    url: 'http://10.128.243.81:8080/sys/login/restful?username='+username+'&password='+password,
+    url: 'http://10.128.246.204:8080/sys/login/restful?username='+username+'&password='+password,
     method: 'post',
   })
 }
