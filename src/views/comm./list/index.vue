@@ -48,8 +48,15 @@
         <el-form-item label="Phone:" :label-width="formLabelWidth">
           <el-input v-model="createForm.phoneNumber" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Level:" :label-width="formLabelWidth">
-          <el-input v-model="editForm.grade" autocomplete="off"></el-input>
+        <el-form-item label="Level:" prop="grade" :label-width="formLabelWidth">
+          <el-select v-model="editForm.grade" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -71,7 +78,14 @@
           <el-input v-model="editForm.phoneNumber" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="Level" :label-width="formLabelWidth">
-          <el-input v-model="editForm.grade" autocomplete="off"></el-input>
+          <el-select v-model="editForm.grade" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -109,6 +123,16 @@
     name: "index",
     data() {
       return {
+        options: [{
+          value: 1,
+          label: 'primary'
+        }, {
+          value: 2,
+          label: 'intermediate'
+        }, {
+          value: 3,
+          label: 'senior'
+        }],
         chartSettings: {
           label: { show: false }
         },
@@ -145,14 +169,14 @@
           emailAddress: "",
           name: "",
           phoneNumber: "",
-          grade:''
+          grade:1
         },
         editForm: {
           id: '',
           emailAddress: "",
           name: "",
           phoneNumber: "",
-          grade:''
+          grade:1
         },
         formLabelWidth: '150px',
         rules: {

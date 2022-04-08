@@ -67,7 +67,7 @@
           {
             "id": 5,
             "lastTime": "2022-04-07 10:59:51",
-            "reminderTime": "2022-04-08 11:59:51",
+            "reminderTime": "2022-04-08 08:20:51",
             "disease": "Acute gastritis",
             "tabletName": "Ranitidine",
             "doctorName": "Mr. Anderson",
