@@ -97,13 +97,6 @@ export const asyncRouterMap = [
         meta: {title: 'Diet list', icon: 'order-return'}
       },
       {
-        path: 'dietDetail',
-        name: 'dietDetail',
-        component: () => import('@/views/diet/dietDetail'),
-        meta: {title: 'Diet detail'},
-        hidden:true
-      },
-      {
         path: 'mgmt',
         name: 'mgmt',
         component: () => import('@/views/diet/add/index'),
@@ -116,21 +109,13 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/notes/list',
     name: 'notes',
-    meta: {title: 'Notes', icon: 'sms'},
     children: [
       {
         path: 'list',
         name: 'list',
         component: () => import('@/views/notes/list/index'),
-        meta: {title: 'Notes List', icon: 'sms-flash'}
-      },
-
-      {
-        path: 'mgmt',
-        name: 'mgmt',
-        component: () => import('@/views/notes/add/index'),
-        meta: {title: 'Notes MGMT.', icon: 'ums-menu'}
-      },
+        meta: {title: 'Notes List', icon: 'sms'}
+      }
     ]
   },
   {
