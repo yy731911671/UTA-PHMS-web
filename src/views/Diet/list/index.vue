@@ -8,16 +8,13 @@
       >Add</el-button
       >
       <el-table :data="tableData" border class="table">
-        <el-table-column prop="name" label="Name" width="200px">
+        <el-table-column prop="dietTime" label="Diet Time" width="200px">
         </el-table-column>
-        <el-table-column prop="emailAddress" label="Email" width="200px">
+        <el-table-column prop="foodName" label="Food Name" width="200px">
         </el-table-column>
-        <el-table-column prop="phoneNumber" label="Phone" width="200px">
+        <el-table-column prop="foodWeight" label="Food Weight" width="200px">
         </el-table-column>
-        <el-table-column label="Level" width="150px">
-          <template slot-scope="scope">
-            <el-tag :type="scope.row.grade==1?'info':scope.row.grade==2?'':'success'" effect="dark">{{scope.row.grade==1?'primary':scope.row.grade==2?'intermediate':'senior'}}</el-tag>
-          </template>
+        <el-table-column prop="calorieCount" label="Calorie Count" width="200px">
         </el-table-column>
         <el-table-column label="Operate" width="150px">
           <template slot-scope="scope">
@@ -37,26 +34,19 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="Add Communication":visible.sync="dialogCreateFormVisible">
+    <el-dialog title="Add Diet Item":visible.sync="dialogCreateFormVisible">
       <el-form :model="createForm" :rules="rules" ref="createForm">
-        <el-form-item label="Name:" :label-width="formLabelWidth" prop="name">
-          <el-input v-model="createForm.name" autocomplete="off"></el-input>
+        <el-form-item label="Diet Time:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.dietTime" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Email:" :label-width="formLabelWidth"  prop="emailAddress">
-          <el-input v-model="createForm.emailAddress" autocomplete="off"></el-input>
+        <el-form-item label="Food Name:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.foodName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Phone:" :label-width="formLabelWidth">
-          <el-input v-model="createForm.phoneNumber" autocomplete="off"></el-input>
+        <el-form-item label="Food Weight:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.foodWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Level:" prop="grade" :label-width="formLabelWidth">
-          <el-select v-model="editForm.grade" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+        <el-form-item label="Calorie Count:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.calorieCount" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -66,26 +56,19 @@
         >
       </div>
     </el-dialog>
-    <el-dialog title="Edit Medication" :visible.sync="dialogEditFormVisible">
+    <el-dialog title="Edit Diet Item" :visible.sync="dialogEditFormVisible">
       <el-form :model="editForm">
-        <el-form-item label="Disease" :label-width="formLabelWidth">
-          <el-input v-model="editForm.name" autocomplete="off"></el-input>
+        <el-form-item label="Diet Time" :label-width="formLabelWidth">
+          <el-input v-model="editForm.dietTime" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Doctor name" :label-width="formLabelWidth">
-          <el-input v-model="editForm.emailAddress" autocomplete="off"></el-input>
+        <el-form-item label="Food Name" :label-width="formLabelWidth">
+          <el-input v-model="editForm.foodName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Phone" :label-width="formLabelWidth">
-          <el-input v-model="editForm.phoneNumber" autocomplete="off"></el-input>
+        <el-form-item label="Food Weight" :label-width="formLabelWidth">
+          <el-input v-model="editForm.foodWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Level" :label-width="formLabelWidth">
-          <el-select v-model="editForm.grade" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+        <el-form-item label="Calorie Count" :label-width="formLabelWidth">
+          <el-input v-model="editForm.calorieCount" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -105,26 +88,16 @@
 
 <script>
   import {
-    getCommunications,
-    createCommunication,
-    deleteCommunication,
-    editCommunication,
-  } from "../../../api/communication";
+    getDietList,
+    createDiet,
+    deleteDiet,
+    editDiet,
+  } from "../../../api/diet";
   import { Message } from 'element-ui'
   export default {
     name: "index",
     data() {
       return {
-        options: [{
-          value: 1,
-          label: 'primary'
-        }, {
-          value: 2,
-          label: 'intermediate'
-        }, {
-          value: 3,
-          label: 'senior'
-        }],
         chartSettings: {
           label: { show: false }
         },
@@ -158,29 +131,32 @@
         dialogCreateFormVisible: false,
         dialogEditFormVisible: false,
         createForm: {
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:1
+          dietTime: "",
+          foodName: "",
+          foodWeight: "",
+          calorieCount: ""
         },
         editForm: {
-          id: '',
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:1
+          id: "",
+          dietTime: "",
+          foodName: "",
+          foodWeight: "",
+          calorieCount: ""
         },
         formLabelWidth: '150px',
         rules: {
-          name: [
-            {required: true, message: "Please enter doctor's name", trigger: 'blur'},
+          dietTime: [
+            {required: true, message: "Please enter diet time", trigger: 'blur'},
           ],
-          emailAddress: [
-            {required: true, message: "Please enter doctor's email", trigger: 'blur'},
+          foodName: [
+            {required: true, message: "Please enter food name", trigger: 'blur'},
           ],
-          grade: [
-            {required: true, message: "Please enter doctor's level", trigger: 'blur'},
+          foodWeight: [
+            {required: true, message: "Please enter food weight", trigger: 'blur'},
           ],
+          calorieCount: [
+            {required: true, message: "Please enter calorie count", trigger: 'blur'},
+          ]
         }
       };
     },
@@ -189,59 +165,38 @@
     },
     methods: {
       getList() {
-        getCommunications().then((res) => {
+        getDietList().then((res) => {
           console.log(res.data)
           this.tableData = [...res.data];
-          let primary = 0,intermediate=0,senior=0
-          this.tableData.forEach(item=>{
-            if(item.grade==1){
-              primary++
-            }else if(item.grade==2){
-              intermediate++
-            }else {
-              senior++
-            }
           })
-          this.chartData =[]
-          this.chartData= {
-            columns: ['type', 'count'],
-            rows: [
-              { type: 'primary', count: primary },
-              { type: 'intermediate', count: intermediate },
-              { type: 'senior', count: senior }
-            ]
-          }
-          console.log(this.chartExtend.graphic[0].style)
-          this.chartExtend.graphic[0].style.text=this.tableData.length
-        });
       },
       handleDeleteClick(row) {
-        deleteCommunication(row.id).then((res) => {
+        deleteDiet(row.id).then((res) => {
           Message.success("Successfully deleted")
           this.getList();
         });
       },
       clearCreateForm() {
         this.createForm = {
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:''
+          dietTime: "",
+          foodName: "",
+          foodWeight: "",
+          calorieCount: ""
         }
       },
       clearEditForm() {
         this.editForm = {
           id: '',
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:''
+          dietTime: "",
+          foodName: "",
+          foodWeight: "",
+          calorieCount: ""
         }
       },
       handleCreateSubmit() {
         this.$refs['createForm'].validate((valid) => {
           if (valid) {
-            createCommunication(this.createForm).then( res => {
+            createDiet(this.createForm).then( res => {
               this.dialogCreateFormVisible = false;
               Message.success("Created successfully")
               this.clearCreateForm();
@@ -257,15 +212,15 @@
       handleEditClick(row) {
         this.editForm = {
           id: row.id,
-          name: row.name,
-          emailAddress: row.emailAddress,
-          phoneNumber: row.phoneNumber,
-          grade:row.grade
+          dietTime: row.dietTime,
+          foodName: row.foodName,
+          foodWeight: row.foodWeight,
+          calorieCount:row.calorieCount
         };
         this.dialogEditFormVisible = true;
       },
       handleEditSubmit() {
-        editCommunication(this.editForm).then(res => {
+        editDiet(this.editForm).then(res => {
           this.dialogEditFormVisible = false;
           Message.success("Successfully modified")
           this.clearEditForm();

@@ -8,16 +8,19 @@
       >Add</el-button
       >
       <el-table :data="tableData" border class="table">
-        <el-table-column prop="name" label="Name" width="200px">
+        <el-table-column prop="vitalSignTime" label="Vital Sign Time" width="200px">
         </el-table-column>
-        <el-table-column prop="emailAddress" label="Email" width="200px">
+        <el-table-column prop="weight" label="Weight" width="200px">
         </el-table-column>
-        <el-table-column prop="phoneNumber" label="Phone" width="200px">
+        <el-table-column prop="height" label="Height" width="200px">
         </el-table-column>
-        <el-table-column label="Level" width="150px">
-          <template slot-scope="scope">
-            <el-tag :type="scope.row.grade==1?'info':scope.row.grade==2?'':'success'" effect="dark">{{scope.row.grade==1?'primary':scope.row.grade==2?'intermediate':'senior'}}</el-tag>
-          </template>
+        <el-table-column prop="heartRate" label="Heart Rate" width="200px">
+        </el-table-column>
+        <el-table-column prop="temperature" label="Temperature" width="200px">
+        </el-table-column>
+        <el-table-column prop="bloodSugar" label="Blood Sugar" width="200px">
+        </el-table-column>
+        <el-table-column prop="bloodPressure" label="Blood Pressure" width="200px">
         </el-table-column>
         <el-table-column label="Operate" width="150px">
           <template slot-scope="scope">
@@ -37,26 +40,28 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="Add Communication":visible.sync="dialogCreateFormVisible">
+    <el-dialog title="Add Vital Sign":visible.sync="dialogCreateFormVisible">
       <el-form :model="createForm" :rules="rules" ref="createForm">
-        <el-form-item label="Name:" :label-width="formLabelWidth" prop="name">
-          <el-input v-model="createForm.name" autocomplete="off"></el-input>
+        <el-form-item label="Vital Sign Time:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.vitalSignTime" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Email:" :label-width="formLabelWidth"  prop="emailAddress">
-          <el-input v-model="createForm.emailAddress" autocomplete="off"></el-input>
+        <el-form-item label="Weight:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.weight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Phone:" :label-width="formLabelWidth">
-          <el-input v-model="createForm.phoneNumber" autocomplete="off"></el-input>
+        <el-form-item label="Height:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.height" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Level:" prop="grade" :label-width="formLabelWidth">
-          <el-select v-model="editForm.grade" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+        <el-form-item label="Heart Rate:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.heartRate" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Temperature:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.temperature" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Blood Sugar:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.bloodSugar" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Blood Pressure:" :label-width="formLabelWidth">
+          <el-input v-model="createForm.bloodPressure" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -68,24 +73,26 @@
     </el-dialog>
     <el-dialog title="Edit Medication" :visible.sync="dialogEditFormVisible">
       <el-form :model="editForm">
-        <el-form-item label="Disease" :label-width="formLabelWidth">
-          <el-input v-model="editForm.name" autocomplete="off"></el-input>
+        <el-form-item label="Vital Sign Time:" :label-width="formLabelWidth">
+          <el-input v-model="editForm.vitalSignTime" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Doctor name" :label-width="formLabelWidth">
-          <el-input v-model="editForm.emailAddress" autocomplete="off"></el-input>
+        <el-form-item label="Weight:" :label-width="formLabelWidth">
+          <el-input v-model="editForm.weight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Phone" :label-width="formLabelWidth">
-          <el-input v-model="editForm.phoneNumber" autocomplete="off"></el-input>
+        <el-form-item label="Height:" :label-width="formLabelWidth">
+          <el-input v-model="editForm.height" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Level" :label-width="formLabelWidth">
-          <el-select v-model="editForm.grade" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+        <el-form-item label="Heart Rate:" :label-width="formLabelWidth">
+          <el-input v-model="editForm.heartRate" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Temperature:" :label-width="formLabelWidth">
+          <el-input v-model="editForm.temperature" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Blood Sugar:" :label-width="formLabelWidth">
+          <el-input v-model="editForm.bloodSugar" autocomplete="off"></el-input>
+        </el-form-item>
+         <el-form-item label="Blood Pressure:" :label-width="formLabelWidth">
+          <el-input v-model="editForm.bloodPressure" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -109,11 +116,11 @@
 
 <script>
   import {
-    getCommunications,
-    createCommunication,
-    deleteCommunication,
-    editCommunication,
-  } from "../../../api/communication";
+    getVitalSignList,
+    createVitalSign,
+    deleteVitalSign,
+    editVitalSign,
+  } from "../../../api/vitalsign";
   import { Message } from 'element-ui'
   export default {
     name: "index",
@@ -140,44 +147,52 @@
             {'日期': '1月6日', '销售额-1季度': 6773, '销售额-2季度': 4454},
           ]
         },
-        options: [{
-          value: 1,
-          label: 'primary'
-        }, {
-          value: 2,
-          label: 'intermediate'
-        }, {
-          value: 3,
-          label: 'senior'
-        }],
 
         tableData: [],
         dialogCreateFormVisible: false,
         dialogEditFormVisible: false,
         createForm: {
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:1
+          vitalSignTime: "",
+          weight: "",
+          height: "",
+          heartRate: "",
+          temperature: "",
+          bloodSugar: "",
+          bloodPressure: ""
         },
         editForm: {
           id: '',
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:1
+          vitalSignTime: "",
+          weight: "",
+          height: "",
+          heartRate: "",
+          temperature: "",
+          bloodSugar: "",
+          bloodPressure: ""
         },
         formLabelWidth: '150px',
         rules: {
-          name: [
-            {required: true, message: "Please enter doctor's name", trigger: 'blur'},
+          vitalSignTime: [
+            {required: true, message: "Please enter vital sign time", trigger: 'blur'},
           ],
-          emailAddress: [
-            {required: true, message: "Please enter doctor's email", trigger: 'blur'},
+          weight: [
+            {required: true, message: "Please enter weight", trigger: 'blur'},
           ],
-          grade: [
-            {required: true, message: "Please enter doctor's level", trigger: 'blur'},
+          height: [
+            {required: true, message: "Please enter height", trigger: 'blur'},
           ],
+          heartRate: [
+            {required: true, message: "Please enter heart rate", trigger: 'blur'},
+          ],
+          temperature: [
+            {required: true, message: "Please enter temperature", trigger: 'blur'},
+          ],
+          bloodSugar: [
+            {required: true, message: "Please enter blood sugar", trigger: 'blur'},
+          ],
+          bloodPressure: [
+            {required: true, message: "Please enter blood pressure", trigger: 'blur'},
+          ]
         }
       };
     },
@@ -186,19 +201,10 @@
     },
     methods: {
       getList() {
-        getCommunications().then((res) => {
+        getVitalSignList().then((res) => {
           console.log(res.data)
           this.tableData = [...res.data];
           let primary = 0,intermediate=0,senior=0
-          this.tableData.forEach(item=>{
-            if(item.grade==1){
-              primary++
-            }else if(item.grade==2){
-              intermediate++
-            }else {
-              senior++
-            }
-          })
           this.chartData =[]
           this.chartData= {
             columns: ['type', 'count'],
@@ -213,32 +219,38 @@
         });
       },
       handleDeleteClick(row) {
-        deleteCommunication(row.id).then((res) => {
+        deleteVitalSign(row.id).then((res) => {
           Message.success("Successfully deleted")
           this.getList();
         });
       },
       clearCreateForm() {
         this.createForm = {
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:''
+          vitalSignTime: "",
+          weight: "",
+          height: "",
+          heartRate: "",
+          temperature: "",
+          bloodSugar: "",
+          bloodPressure: ""
         }
       },
       clearEditForm() {
         this.editForm = {
           id: '',
-          emailAddress: "",
-          name: "",
-          phoneNumber: "",
-          grade:''
+          vitalSignTime: "",
+          weight: "",
+          height: "",
+          heartRate: "",
+          temperature: "",
+          bloodSugar: "",
+          bloodPressure: ""
         }
       },
       handleCreateSubmit() {
         this.$refs['createForm'].validate((valid) => {
           if (valid) {
-            createCommunication(this.createForm).then( res => {
+            createVitalSign(this.createForm).then( res => {
               this.dialogCreateFormVisible = false;
               Message.success("Created successfully")
               this.clearCreateForm();
@@ -254,15 +266,18 @@
       handleEditClick(row) {
         this.editForm = {
           id: row.id,
-          name: row.name,
-          emailAddress: row.emailAddress,
-          phoneNumber: row.phoneNumber,
-          grade:row.grade
+          vitalSignTime: row.vitalSignTime,
+          weight: row.weight,
+          height: row.height,
+          heartRate: row.heartRate,
+          temperature: row.temperature,
+          bloodSugar: row.bloodSugar,
+          bloodPressure: row.bloodPressure
         };
         this.dialogEditFormVisible = true;
       },
       handleEditSubmit() {
-        editCommunication(this.editForm).then(res => {
+        editVitalSign(this.editForm).then(res => {
           this.dialogEditFormVisible = false;
           Message.success("Successfully modified")
           this.clearEditForm();
@@ -279,7 +294,7 @@
     height: 150vh;
   }
   .container {
-    width: 900px;
+    width: 1550px;
     margin: 0 auto;
   }
 
