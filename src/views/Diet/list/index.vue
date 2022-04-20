@@ -36,16 +36,16 @@
     </div>
     <el-dialog title="Add Diet Item":visible.sync="dialogCreateFormVisible">
       <el-form :model="createForm" :rules="rules" ref="createForm">
-        <el-form-item label="Diet Time:" :label-width="formLabelWidth">
+        <el-form-item label="Diet Time:" :label-width="formLabelWidth" prop="dietTime">
           <el-input v-model="createForm.dietTime" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Food Name:" :label-width="formLabelWidth">
+        <el-form-item label="Food Name:" :label-width="formLabelWidth" prop="foodName">
           <el-input v-model="createForm.foodName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Food Weight:" :label-width="formLabelWidth">
+        <el-form-item label="Food Weight:" :label-width="formLabelWidth" prop="foodWeight">
           <el-input v-model="createForm.foodWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Calorie Count:" :label-width="formLabelWidth">
+        <el-form-item label="Calorie Count:" :label-width="formLabelWidth" prop="calorieCount">
           <el-input v-model="createForm.calorieCount" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -57,17 +57,17 @@
       </div>
     </el-dialog>
     <el-dialog title="Edit Diet Item" :visible.sync="dialogEditFormVisible">
-      <el-form :model="editForm">
-        <el-form-item label="Diet Time" :label-width="formLabelWidth">
-          <el-input v-model="editForm.dietTime" autocomplete="off"></el-input>
+      <el-form :model="editForm" :rules="rules" ref="editForm">
+        <el-form-item label="Diet Time" :label-width="formLabelWidth" prop="dietTime">
+          <el-input v-model="editForm.dietTime" disabled autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Food Name" :label-width="formLabelWidth">
+        <el-form-item label="Food Name" :label-width="formLabelWidth" prop="foodName">
           <el-input v-model="editForm.foodName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Food Weight" :label-width="formLabelWidth">
+        <el-form-item label="Food Weight" :label-width="formLabelWidth" prop="foodWeight">
           <el-input v-model="editForm.foodWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Calorie Count" :label-width="formLabelWidth">
+        <el-form-item label="Calorie Count" :label-width="formLabelWidth" prop="calorieCount">
           <el-input v-model="editForm.calorieCount" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -143,7 +143,7 @@
           foodWeight: "",
           calorieCount: ""
         },
-        formLabelWidth: '150px',
+        formLabelWidth: '130px',
         rules: {
           dietTime: [
             {required: true, message: "Please enter diet time", trigger: 'blur'},
@@ -220,12 +220,20 @@
         this.dialogEditFormVisible = true;
       },
       handleEditSubmit() {
-        editDiet(this.editForm).then(res => {
-          this.dialogEditFormVisible = false;
-          Message.success("Successfully modified")
-          this.clearEditForm();
-          this.getList();
-        })
+        this.$refs['editForm'].validate((valid) => {
+          if (valid) {
+            editDiet(this.editForm).then(res => {
+              this.dialogEditFormVisible = false;
+              Message.success("Successfully modified")
+              this.clearEditForm();
+              this.getList();
+            })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+
       }
     },
   };
@@ -233,21 +241,25 @@
 
 <style scoped>
   .all-container{
-    width: 100%;
-    height: 150vh;
+    height: auto;
   }
   .container {
-    width: 900px;
-    margin: 0 auto;
   }
-
+  .table{
+    margin-left: 100px;
+    width: 950px;
+    font-size: 14px;
+  }
   .createbtn {
-    margin: 20px 0;
+    margin:20px 0 20px 100px;
   }
   .chartBox{
     display: flex;
     justify-content: center;
     background: #FFFFFF;
+  }
+  .el-input {
+    width: 90%;
   }
   .title{
     color:seagreen;

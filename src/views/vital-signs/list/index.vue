@@ -1,26 +1,28 @@
 <template>
   <div class="all-container">
     <div class="container">
-      <el-button
-        type="primary"
-        class="createbtn"
-        @click="dialogCreateFormVisible = true"
-      >Add</el-button
-      >
+      <div class="header">
+        <el-button
+          type="primary"
+          class="createbtn"
+          @click="dialogCreateFormVisible = true"
+        >Add</el-button
+        ><img height="100px" width="500px" style="border-radius: 10px" src="../../../../static/Vital1.png">
+      </div>
       <el-table :data="tableData" border class="table">
-        <el-table-column prop="vitalSignTime" label="Vital Sign Time" width="200px">
+        <el-table-column prop="vitalSignTime" label="Vital Sign Time" width="150px">
         </el-table-column>
-        <el-table-column prop="weight" label="Weight" width="200px">
+        <el-table-column prop="weight" label="Weight" width="150px">
         </el-table-column>
-        <el-table-column prop="height" label="Height" width="200px">
+        <el-table-column prop="height" label="Height" width="150px">
         </el-table-column>
-        <el-table-column prop="heartRate" label="Heart Rate" width="200px">
+        <el-table-column prop="heartRate" label="Heart Rate" width="150px">
         </el-table-column>
-        <el-table-column prop="temperature" label="Temperature" width="200px">
+        <el-table-column prop="temperature" label="Temperature" width="150px">
         </el-table-column>
-        <el-table-column prop="bloodSugar" label="Blood Sugar" width="200px">
+        <el-table-column prop="bloodSugar" label="Blood Sugar" width="150px">
         </el-table-column>
-        <el-table-column prop="bloodPressure" label="Blood Pressure" width="200px">
+        <el-table-column prop="bloodPressure" label="Blood Pressure" width="150px">
         </el-table-column>
         <el-table-column label="Operate" width="150px">
           <template slot-scope="scope">
@@ -42,25 +44,25 @@
     </div>
     <el-dialog title="Add Vital Sign":visible.sync="dialogCreateFormVisible">
       <el-form :model="createForm" :rules="rules" ref="createForm">
-        <el-form-item label="Vital Sign Time:" :label-width="formLabelWidth">
+        <el-form-item label="Vital Sign Time:" :label-width="formLabelWidth" prop="vitalSignTime">
           <el-input v-model="createForm.vitalSignTime" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Weight:" :label-width="formLabelWidth">
+        <el-form-item label="Weight:" :label-width="formLabelWidth" prop="weight">
           <el-input v-model="createForm.weight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Height:" :label-width="formLabelWidth">
+        <el-form-item label="Height:" :label-width="formLabelWidth" prop="height">
           <el-input v-model="createForm.height" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Heart Rate:" :label-width="formLabelWidth">
+        <el-form-item label="Heart Rate:" :label-width="formLabelWidth" prop="heartRate">
           <el-input v-model="createForm.heartRate" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Temperature:" :label-width="formLabelWidth">
+        <el-form-item label="Temperature:" :label-width="formLabelWidth" prop="temperature">
           <el-input v-model="createForm.temperature" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Blood Sugar:" :label-width="formLabelWidth">
+        <el-form-item label="Blood Sugar:" :label-width="formLabelWidth" prop="bloodSugar">
           <el-input v-model="createForm.bloodSugar" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Blood Pressure:" :label-width="formLabelWidth">
+        <el-form-item label="Blood Pressure:" :label-width="formLabelWidth" prop="bloodPressure">
           <el-input v-model="createForm.bloodPressure" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -71,27 +73,27 @@
         >
       </div>
     </el-dialog>
-    <el-dialog title="Edit Medication" :visible.sync="dialogEditFormVisible">
+    <el-dialog title="Edit Medication" :rules="rules" :visible.sync="dialogEditFormVisible">
       <el-form :model="editForm">
-        <el-form-item label="Vital Sign Time:" :label-width="formLabelWidth">
-          <el-input v-model="editForm.vitalSignTime" autocomplete="off"></el-input>
+        <el-form-item label="Vital Sign Time:" :label-width="formLabelWidth" prop="vitalSignTime">
+          <el-input v-model="editForm.vitalSignTime" autocomplete="off" disabled prop="vitalSignTime"></el-input>
         </el-form-item>
-        <el-form-item label="Weight:" :label-width="formLabelWidth">
+        <el-form-item label="Weight:" :label-width="formLabelWidth" prop="weight">
           <el-input v-model="editForm.weight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Height:" :label-width="formLabelWidth">
+        <el-form-item label="Height:" :label-width="formLabelWidth" prop="height">
           <el-input v-model="editForm.height" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Heart Rate:" :label-width="formLabelWidth">
+        <el-form-item label="Heart Rate:" :label-width="formLabelWidth" prop="heartRate">
           <el-input v-model="editForm.heartRate" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Temperature:" :label-width="formLabelWidth">
+        <el-form-item label="Temperature:" :label-width="formLabelWidth" prop="temperature">
           <el-input v-model="editForm.temperature" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Blood Sugar:" :label-width="formLabelWidth">
+        <el-form-item label="Blood Sugar:" :label-width="formLabelWidth" prop="bloodSugar">
           <el-input v-model="editForm.bloodSugar" autocomplete="off"></el-input>
         </el-form-item>
-         <el-form-item label="Blood Pressure:" :label-width="formLabelWidth">
+         <el-form-item label="Blood Pressure:" :label-width="formLabelWidth" prop="bloodPressure">
           <el-input v-model="editForm.bloodPressure" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -108,7 +110,7 @@
         <ve-line :data="chartData" :extend="chartExtend" ref="chartline" width="600px" height="400px"></ve-line>
       </div>
       <div style="margin-top:30px">
-        <img height="300px" style="border-radius: 10px" src="../../../../static/Vital.png">
+        <ve-line :data="chartData2" :extend="chartExtend2" ref="chartline2" width="600px" height="400px"></ve-line>
       </div>
     </div>
   </div>
@@ -135,19 +137,22 @@
         },
         color:['#E4004F','#64C9FA']
       }
+      this.chartExtend2 = {
+        series: {
+          smooth: false,  // 将曲线变为直线
+          type: 'line'
+        },
+        color:['#E4004F','#64C9FA']
+      }
       return {
         chartData:{
-          columns:['日期', '销售额-1季度', '销售额-2季度'],
-          rows:[
-            {'日期': '1月1日', '销售额-1季度': 1523, '销售额-2季度': 3523},
-            {'日期': '1月2日', '销售额-1季度': 3533, '销售额-2季度': 1232},
-            {'日期': '1月3日', '销售额-1季度': 2523, '销售额-2季度': 9768},
-            {'日期': '1月4日', '销售额-1季度': 4588, '销售额-2季度': 5252},
-            {'日期': '1月5日', '销售额-1季度': 5632, '销售额-2季度': 2536},
-            {'日期': '1月6日', '销售额-1季度': 6773, '销售额-2季度': 4454},
-          ]
+          columns:[],
+          rows:[]
         },
-
+        chartData2:{
+          columns:[],
+          rows:[]
+        },
         tableData: [],
         dialogCreateFormVisible: false,
         dialogEditFormVisible: false,
@@ -170,7 +175,7 @@
           bloodSugar: "",
           bloodPressure: ""
         },
-        formLabelWidth: '150px',
+        formLabelWidth: '130px',
         rules: {
           vitalSignTime: [
             {required: true, message: "Please enter vital sign time", trigger: 'blur'},
@@ -199,23 +204,28 @@
     created() {
       this.getList();
     },
+
     methods: {
       getList() {
         getVitalSignList().then((res) => {
           console.log(res.data)
-          this.tableData = [...res.data];
-          let primary = 0,intermediate=0,senior=0
-          this.chartData =[]
-          this.chartData= {
-            columns: ['type', 'count'],
-            rows: [
-              { type: 'primary', count: primary },
-              { type: 'intermediate', count: intermediate },
-              { type: 'senior', count: senior }
-            ]
+          let row = [],row2=[]
+          res.data.forEach(item=>{
+            row.push({'date': item.vitalSignTime, 'blood pressure': item.bloodPressure})
+            row2.push({'date': item.vitalSignTime, 'blood sugar': item.bloodSugar})
+          })
+          console.log(row)
+          this.tableData = [...res.data];//vitalSignTime,bloodPressure
+          this.chartData = {}
+          this.chartData2 ={}
+          this.chartData={
+            columns:['date', 'blood pressure'],
+            rows:row
           }
-          console.log(this.chartExtend.graphic[0].style)
-          this.chartExtend.graphic[0].style.text=this.tableData.length
+          this.chartData2={
+            columns:['date', 'blood sugar'],
+            rows:row2
+          }
         });
       },
       handleDeleteClick(row) {
@@ -291,15 +301,25 @@
 <style scoped>
   .all-container{
     width: 100%;
-    height: 150vh;
   }
   .container {
-    width: 1550px;
     margin: 0 auto;
   }
-
+.table{
+  margin-left: 100px;
+  width: 90%;
+}
+  .header{
+    display: flex;
+    width: 100%;
+    align-items: end;
+  }
   .createbtn {
-    margin: 20px 0;
+    margin:20px 20px 20px 100px;
+    height: fit-content;
+  }
+  .el-input {
+    width: 90%;
   }
   .chartBox{
     display: flex;
@@ -310,4 +330,5 @@
     color:seagreen;
     margin-top: 20px;
   }
+
 </style>

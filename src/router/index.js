@@ -74,12 +74,6 @@ export const asyncRouterMap = [
         component: () => import('@/views/vital-signs/list/index'),
         meta: {title: 'Vital signs list', icon: 'order-return-reason'}
       },
-      {
-        path: 'mgmt',
-        name: 'mgmt',
-        component: () => import('@/views/vital-signs/add/index'),
-        meta: {title: 'Vital MGMT.', icon: 'ums-menu'}
-      },
     ]
   },
 
@@ -95,13 +89,7 @@ export const asyncRouterMap = [
         name: 'list',
         component: () => import('@/views/diet/list/index'),
         meta: {title: 'Diet list', icon: 'order-return'}
-      },
-      {
-        path: 'mgmt',
-        name: 'mgmt',
-        component: () => import('@/views/diet/add/index'),
-        meta: {title: 'Diet MGMT.', icon: 'ums-menu'}
-      },
+      }
     ]
   },
   {
