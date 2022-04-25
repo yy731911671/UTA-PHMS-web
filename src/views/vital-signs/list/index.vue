@@ -211,8 +211,8 @@
           console.log(res.data)
           let row = [],row2=[]
           res.data.forEach(item=>{
-            row.push({'date': item.vitalSignTime, 'blood pressure': item.bloodPressure})
-            row2.push({'date': item.vitalSignTime, 'blood sugar': item.bloodSugar})
+            row.unshift({'date': item.vitalSignTime, 'blood pressure': item.bloodPressure})
+            row2.unshift({'date': item.vitalSignTime, 'blood sugar': item.bloodSugar})
           })
           console.log(row)
           this.tableData = [...res.data];//vitalSignTime,bloodPressure

@@ -124,8 +124,10 @@
             this.$router.push('/medication/medicationList');
             break;
           case 1:
+            this.$router.push('/vital-signs/list');
             break;
           case 2:
+            this.$router.push('/diet/list');
             break;
           case 3:
             break;
